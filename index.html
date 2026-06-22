@@ -31,14 +31,14 @@
             const act = document.getElementById('action').value;
 
         fetch(`http://localhost:3000/calculate?num1=${n1}&num2=${n2}&action=${act}`)
-            .then(res => res.json())
-            .then(data => {
-            if (data.error) {
-                document.getElementById('calResult').innerText = "Error: " + data.error;
-                    } else {
-                    document.getElementById('calResult').innerText = "Result: " + data.result;
-                    }
-                })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            document.getElementById('calResult').innerText = "Error: " + data.error;
+        } else {
+            document.getElementById('calResult').innerText = "Result: " + data.result;
+        }
+    })
         }
     </script>
 </body>
