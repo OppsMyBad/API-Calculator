@@ -1,27 +1,101 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>เครื่องคิดเลขสุดล้ำ</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box {
+            background-color: #ffffff;
+            padding: 30px;
+            width: 350px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        h3 {
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+            background-color: #f9f9f9;
+        }
+        input:focus, select:focus {
+            border-color: #667eea;
+            background-color: #fff;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            margin-top: 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #f0f4ff;
+            border: 1px dashed #667eea;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 
     <div class="box">
-        <h3>calculator</h3>
-        <input type="number" id="num1" placeholder="1">
-        
-        <select id="action">
-            <option value="add">+</option>
-            <option value="subtract">-</option>
-            <option value="multiply">*</option>
-            <option value="divide">/</option>
-        </select>
-        
-        <input type="number" id="num2" placeholder="2">
+        <h3>เครื่องคิดเลข</h3>
+        <div class="input-group">
+            <input type="number" id="num1" placeholder="ตัวเลขที่ 1">
+        </div>
+        <div class="input-group">
+            <select id="action">
+                <option value="add">➕ บวก (+)</option>
+                <option value="subtract">➖ ลบ (-)</option>
+                <option value="multiply">✖️ คูณ (*)</option>
+                <option value="divide">➗ หาร (/)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <input type="number" id="num2" placeholder="ตัวเลขที่ 2">
+        </div>
         <button onclick="doCal()">คำนวณ</button>
-        
-        <div id="calResult" class="result"></div>
+        <div id="calResult" class="result">ผลลัพธ์จะขึ้นตรงนี้</div>
     </div>
 
     <script>
@@ -30,15 +104,15 @@
             const n2 = document.getElementById('num2').value;
             const act = document.getElementById('action').value;
 
-        fetch(`http://localhost:3000/calculate?num1=${n1}&num2=${n2}&action=${act}`)
-    .then(res => res.json())
-    .then(data => {
-        if (data.error) {
-            document.getElementById('calResult').innerText = "Error: " + data.error;
-        } else {
-            document.getElementById('calResult').innerText = "Result: " + data.result;
-        }
-    })
+            fetch(`http://localhost:3000/calculate?num1=${n1}&num2=${n2}&action=${act}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('calResult').innerText = "❌ ผิดพลาด: " + data.error;
+                    } else {
+                        document.getElementById('calResult').innerText = "✨ คำตอบ: " + data.result;
+                    }
+                });
         }
     </script>
 </body>
